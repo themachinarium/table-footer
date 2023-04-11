@@ -27736,7 +27736,7 @@ var render = function() {
                     "th",
                     { class: "text-" + field.textAlign },
                     [
-                      _vm.sortable && field.sortable
+                      field.sortable
                         ? _c(
                             "sortable-icon",
                             {
