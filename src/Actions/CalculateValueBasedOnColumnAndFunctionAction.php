@@ -28,7 +28,13 @@ class CalculateValueBasedOnColumnAndFunctionAction
     }
 
     private function sum($query,$function,$column) {
-        return array_sum(array_values(array_column($query->get()->toArray(),$column)));
+        $total = 0;
+
+        $query->chunk(10000, function ($rows) use ($column, &$total) {
+            $total += array_sum(array_column($rows->toArray(), $column));
+        });
+
+        return $total;
     }
 
     private function min($query,$function,$column) {
